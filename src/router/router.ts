@@ -1,8 +1,9 @@
 import { Router, Request, Response } from 'express';
+import gambleController from '../controller/gambleController'
 
 const router = Router();
 
-router.get('/gamble/:id', (req: Request, res: Response)=> {
+router.post('/gamble/:id', (req: Request, res: Response)=> {
 
     const id = req.params.id;
 
