@@ -25,7 +25,7 @@ class gambleHandler {
         //add one turn
         this.turn.addTurn();
         this.turn.updateScore(result);
-        this.turn.evaluateGame();
+        const winner = this.turn.evaluateGame();
         //controlate the logic of the turns
         const controlOfTurn = gambleController_1.default.controlOfTurn(this.turn.numberOfTurn_, this.turn.scorePlayerOne_, this.turn.scorePlayerTwo_);
         if (!controlOfTurn) {
@@ -37,8 +37,7 @@ class gambleHandler {
             result,
             controlOfTurn,
             turn: gambleHandler.turn,
-            scorePlayerOne: this.turn.scorePlayerOne_,
-            scorePlayerTwo: this.turn.scorePlayerTwo_
+            winner
         });
     }
 }

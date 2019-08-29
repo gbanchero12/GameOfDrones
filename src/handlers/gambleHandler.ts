@@ -33,7 +33,7 @@ export default class gambleHandler {
 
         this.turn.updateScore(result);
 
-        this.turn.evaluateGame();
+        const winner = this.turn.evaluateGame();
         
          //controlate the logic of the turns
          const controlOfTurn: boolean = gambleController.controlOfTurn(this.turn.numberOfTurn_,
@@ -48,8 +48,7 @@ export default class gambleHandler {
             result,
             controlOfTurn,
             turn: gambleHandler.turn,
-            scorePlayerOne: this.turn.scorePlayerOne_!,
-            scorePlayerTwo: this.turn.scorePlayerTwo_!
+            winner
         })
     }
 

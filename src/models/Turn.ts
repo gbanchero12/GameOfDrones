@@ -47,10 +47,15 @@ export default class Turn{
          if (result == -1) this.scorePlayerTwo!++;
     }
 
-    public evaluateGame(): void{
-        if (this.numberOfTurn == 3 && this.scorePlayerOne_! > this.scorePlayerTwo_!) console.log('Player 1 wins');
-        if (this.numberOfTurn == 3 && this.scorePlayerOne_! < this.scorePlayerTwo_!) console.log('Player 2 wins');
-        if (this.numberOfTurn == 3 && this.scorePlayerOne_! == this.scorePlayerTwo_!) console.log('Drow');
+    public evaluateGame(): string {
+        if (this.numberOfTurn == 3 && this.scorePlayerOne_! > this.scorePlayerTwo_!) return 'Player 1 wins';
+        if (this.numberOfTurn == 3 && this.scorePlayerOne_! < this.scorePlayerTwo_!) return 'Player 2 wins';
+        if (this.numberOfTurn == 3 && this.scorePlayerOne_! == this.scorePlayerTwo_!) return 'Draw';
+        
+        if (this.numberOfTurn == 3)
+        throw new Error('ERROR CODE:3 - The winner was not detected');
+    
+        return '';
     }
 
 }

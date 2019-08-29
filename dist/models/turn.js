@@ -38,11 +38,14 @@ class Turn {
     }
     evaluateGame() {
         if (this.numberOfTurn == 3 && this.scorePlayerOne_ > this.scorePlayerTwo_)
-            console.log('Player 1 wins');
+            return 'Player 1 wins';
         if (this.numberOfTurn == 3 && this.scorePlayerOne_ < this.scorePlayerTwo_)
-            console.log('Player 2 wins');
+            return 'Player 2 wins';
         if (this.numberOfTurn == 3 && this.scorePlayerOne_ == this.scorePlayerTwo_)
-            console.log('Drow');
+            return 'Draw';
+        if (this.numberOfTurn == 3)
+            throw new Error('ERROR CODE:3 - The winner was not detected');
+        return '';
     }
 }
 exports.default = Turn;
