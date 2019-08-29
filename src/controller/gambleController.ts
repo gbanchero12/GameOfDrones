@@ -19,9 +19,14 @@ export default class GambleController {
         gamble.combination_.push(gamble.gamblePlayerTwo);
     };
 
+     //move to other class with persistence
 
+    public static controlOfTurn(turn: number, scorePlayerOne: number, scorePlayerTwo: number): boolean{
 
-
-    
+        if(turn == 3 || scorePlayerOne == 3 || scorePlayerTwo == 3){            
+            return false;            
+            }
+        return true;
+    }
 
 }
