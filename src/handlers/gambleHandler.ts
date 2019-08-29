@@ -1,13 +1,17 @@
 import Gamble from '../models/Gamble'
 import gambleController from '../controller/gambleController';
+import Turn from '../models/turn';
 
 export default class gambleHandler {
 
-    private static turn: number = 0;
-    private static scorePlayerOne: number = 0;
-    private static scorePlayerTwo: number = 0;
-
+    private static turn: Turn;
+    
     public static gambleHandler(req: any, res: any) {
+
+        if(this.turn == null){
+            this.turn = new Turn;
+        }
+
         //move player 1
         const id = Number(req.params.id);
         //move player 2
@@ -22,38 +26,30 @@ export default class gambleHandler {
         const movePlayerTwo = gamble.combination_[1];
 
         //calculate of the result
-        const result = gambleController.getResult(gamble.combination_, gamble);
+        const result: number = gambleController.getResult(gamble.combination_, gamble);
 
         //add one turn
-        this.turn++;
+        this.turn.addTurn();
+
+        this.turn.updateScore(result);
+
+        this.turn.evaluateGame();
         
-        //player 1 win
-        if (result == 1) this.scorePlayerOne++;
-
-        //player 2 win
-        if (result == -1) this.scorePlayerTwo++;
-
-        if (this.turn == 3 && this.scorePlayerOne > this.scorePlayerTwo) console.log('Player 1 wins');
-        if (this.turn == 3 && this.scorePlayerOne < this.scorePlayerTwo) console.log('Player 2 wins');
-        if (this.turn == 3 && this.scorePlayerOne == this.scorePlayerTwo) console.log('Drow');
-
          //controlate the logic of the turns
-         if (!gambleController.controlOfTurn(gambleHandler.turn,
-            gambleHandler.scorePlayerOne, gambleHandler.scorePlayerTwo)) {
-            this.turn = 0;
-            this.scorePlayerOne = 0;
-            this.scorePlayerTwo = 0;
+         const controlOfTurn: boolean = gambleController.controlOfTurn(this.turn.numberOfTurn_,
+            this.turn.scorePlayerOne_!, this.turn.scorePlayerTwo_!);
+         if (!controlOfTurn) {
+            this.turn = new Turn();
         }
 
         res.json({
             movePlayerOne,
             movePlayerTwo,
             result,
-            controlOfTurn: gambleController.controlOfTurn(gambleHandler.turn,
-                gambleHandler.scorePlayerOne, gambleHandler.scorePlayerTwo),
+            controlOfTurn,
             turn: gambleHandler.turn,
-            scorePlayerOne: this.scorePlayerOne,
-            scorePlayerTwo: this.scorePlayerTwo
+            scorePlayerOne: this.turn.scorePlayerOne_!,
+            scorePlayerTwo: this.turn.scorePlayerTwo_!
         })
     }
 

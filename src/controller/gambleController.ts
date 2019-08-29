@@ -3,7 +3,7 @@ import Gamble from '../models/Gamble';
 
 export default class GambleController {
       
-    public static getResult(combination:number[], gamble: Gamble): any {
+    public static getResult(combination:number[], gamble: Gamble): number {
         if(!_.isNil(combination[0]) && !_.isNil(combination[1])){
             const ret = gamble.check_[combination[0]][combination[1]];
             return ret;
