@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Gamble_1 = __importDefault(require("../models/Gamble"));
 const gambleController_1 = __importDefault(require("../controller/gambleController"));
 const turn_1 = __importDefault(require("../models/turn"));
+const mysql_1 = __importDefault(require("../mysql/mysql"));
 class gambleHandler {
     static gambleHandler(req, res) {
         if (this.turn == null) {
@@ -29,16 +30,37 @@ class gambleHandler {
         //controlate the logic of the turns
         const controlOfTurn = gambleController_1.default.controlOfTurn(this.turn.numberOfTurn_, this.turn.scorePlayerOne_, this.turn.scorePlayerTwo_);
         if (!controlOfTurn) {
+            const query = `INSERT INTO table_statistics (ID, PLAYER, SCORE) VALUES (NULL,"${winner}",1);`;
+            mysql_1.default.runQuery(query, (err) => {
+                if (err) {
+                    res.status(400).json({
+                        ok: false,
+                        error: err
+                    });
+                }
+                else {
+                    res.json({
+                        movePlayerOne,
+                        movePlayerTwo,
+                        result,
+                        controlOfTurn,
+                        turn: gambleHandler.turn,
+                        winner
+                    });
+                }
+            });
             this.turn = new turn_1.default();
         }
-        res.json({
-            movePlayerOne,
-            movePlayerTwo,
-            result,
-            controlOfTurn,
-            turn: gambleHandler.turn,
-            winner
-        });
+        else {
+            res.json({
+                movePlayerOne,
+                movePlayerTwo,
+                result,
+                controlOfTurn,
+                turn: gambleHandler.turn,
+                winner
+            });
+        }
     }
 }
 exports.default = gambleHandler;

@@ -48,8 +48,8 @@ export default class Turn{
     }
 
     public evaluateGame(): string {
-        if (this.numberOfTurn == 3 && this.scorePlayerOne_! > this.scorePlayerTwo_!) return 'Player 1 wins';
-        if (this.numberOfTurn == 3 && this.scorePlayerOne_! < this.scorePlayerTwo_!) return 'Player 2 wins';
+        if (this.numberOfTurn == 3 && this.scorePlayerOne_! > this.scorePlayerTwo_!) return 'Player 1';
+        if (this.numberOfTurn == 3 && this.scorePlayerOne_! < this.scorePlayerTwo_!) return 'Player 2';
         if (this.numberOfTurn == 3 && this.scorePlayerOne_! == this.scorePlayerTwo_!) return 'Draw';
         
         if (this.numberOfTurn == 3)

@@ -19,23 +19,29 @@ export default class MYSQL {
     }
 
     public static get instance() {
-        return this._instance || ( this._instance = new this() );
+        return this._instance || (this._instance = new this());
     }
 
-    static runQuery ( query: string, callback: Function ){
-        this.instance.cnn.query(query, ( err, results: Object[], fields )=>{
-            if (err){console.log('Error in the query');
-            console.log(err);
-            return;
-        }
+    static runQuery(query: string, callback: Function) {
+        this.instance.cnn.query(query, ( err, results: Object[], fields ) => {
+            if (err) {
+                console.log('Error in the query');
+                console.log(err);
+                return callback(err);
+            }
 
+            if (results.length === 0) {
+                callback('Empty record');
+            } else {
+                callback(null, results);
+            }
 
         });
     }
 
     private connectDB() {
-        this.cnn.connect(( err: mysql.MysqlError ) => {
-            if ( err ) {
+        this.cnn.connect((err: mysql.MysqlError) => {
+            if (err) {
                 console.log(err.message);
                 return;
             }

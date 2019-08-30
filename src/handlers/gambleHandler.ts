@@ -1,14 +1,15 @@
 import Gamble from '../models/Gamble'
 import gambleController from '../controller/gambleController';
 import Turn from '../models/turn';
+import MYSQL from '../mysql/mysql';
 
 export default class gambleHandler {
 
     private static turn: Turn;
-    
+
     public static gambleHandler(req: any, res: any) {
 
-        if(this.turn == null){
+        if (this.turn == null) {
             this.turn = new Turn;
         }
 
@@ -34,22 +35,44 @@ export default class gambleHandler {
         this.turn.updateScore(result);
 
         const winner = this.turn.evaluateGame();
-        
-         //controlate the logic of the turns
-         const controlOfTurn: boolean = gambleController.controlOfTurn(this.turn.numberOfTurn_,
+
+        //controlate the logic of the turns
+        const controlOfTurn: boolean = gambleController.controlOfTurn(this.turn.numberOfTurn_,
             this.turn.scorePlayerOne_!, this.turn.scorePlayerTwo_!);
-         if (!controlOfTurn) {
+        if (!controlOfTurn) {
+            const query = `INSERT INTO table_statistics (ID, PLAYER, SCORE) VALUES (NULL,"${winner}",1);`;
+            MYSQL.runQuery(query, (err: any) => {
+                if (err) {
+                    res.status(400).json({
+                        ok: false,
+                        error: err
+                    });
+                }else{
+                    res.json({
+                        movePlayerOne,
+                        movePlayerTwo,
+                        result,
+                        controlOfTurn,
+                        turn: gambleHandler.turn,
+                        winner
+                    });
+                }
+            });
             this.turn = new Turn();
+        } else {
+
+            res.json({
+                movePlayerOne,
+                movePlayerTwo,
+                result,
+                controlOfTurn,
+                turn: gambleHandler.turn,
+                winner
+            });
         }
 
-        res.json({
-            movePlayerOne,
-            movePlayerTwo,
-            result,
-            controlOfTurn,
-            turn: gambleHandler.turn,
-            winner
-        })
+
     }
+
 
 }
