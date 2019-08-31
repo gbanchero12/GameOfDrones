@@ -1,5 +1,6 @@
 import express = require('express');
 import path = require('path');
+import cors = require('cors');
 
 export default class Server {
     public app: express.Application;
@@ -16,7 +17,8 @@ export default class Server {
 
     private publicFolder(){
         const publicPath = path.resolve(__dirname, '../public');
-        this.app.use( express.static(publicPath) );
+        this.app.use( express.static(publicPath)); 
+        this.app.use(cors({origin: 'http://localhost:4200'}));
     }
 
     start(callback: any) {

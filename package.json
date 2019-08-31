@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon dist/index.js",
+    "start": "nodemon dist/index.js --proxy-config proxy.ts",
     "html": "copyfiles --up 1 src/public/*.html dist",
     "build": "tsc && npm run html"
   },
@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/gbanchero12/GameOfDrones#readme",
   "dependencies": {
+    "@types/cors": "^2.8.6",
     "copyfiles": "^2.1.1",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "lodash": "^4.17.15",
     "mysql": "github:mysqljs/mysql",

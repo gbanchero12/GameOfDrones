@@ -43,11 +43,13 @@ export default class gambleHandler {
             const query = `INSERT INTO table_statistics (ID, PLAYER, SCORE) VALUES (NULL,"${winner}",1);`;
             MYSQL.runQuery(query, (err: any) => {
                 if (err) {
+                    
                     res.status(400).json({
                         ok: false,
                         error: err
                     });
                 }else{
+                    res.setHeader('Access-Control-Allow-Origin','localhost:4200');
                     res.json({
                         movePlayerOne,
                         movePlayerTwo,
@@ -60,7 +62,7 @@ export default class gambleHandler {
             });
             this.turn = new Turn();
         } else {
-
+            res.setHeader('Access-Control-Allow-Origin','localhost:4200');
             res.json({
                 movePlayerOne,
                 movePlayerTwo,

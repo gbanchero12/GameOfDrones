@@ -11,7 +11,7 @@ router.get('/gamble/:id/:id2', (req, res) => {
     gambleHandler_1.default.gambleHandler(req, res);
 });
 router.get('/statistics', (req, res) => {
-    const query = 'SELECT * FROM table_statistics';
+    const query = 'SELECT ID, PLAYER, SUM(SCORE) as SCORE FROM table_statistics GROUP BY PLAYER';
     mysql_1.default.runQuery(query, (err, statistics) => {
         if (err) {
             res.status(400).json({

@@ -39,6 +39,7 @@ class gambleHandler {
                     });
                 }
                 else {
+                    res.setHeader('Access-Control-Allow-Origin', 'localhost:4200');
                     res.json({
                         movePlayerOne,
                         movePlayerTwo,
@@ -52,6 +53,7 @@ class gambleHandler {
             this.turn = new turn_1.default();
         }
         else {
+            res.setHeader('Access-Control-Allow-Origin', 'localhost:4200');
             res.json({
                 movePlayerOne,
                 movePlayerTwo,
