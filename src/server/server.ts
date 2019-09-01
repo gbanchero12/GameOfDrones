@@ -1,6 +1,7 @@
 import express = require('express');
 import path = require('path');
 import cors = require('cors');
+import bodyParser = require('body-parser');
 
 export default class Server {
     public app: express.Application;
@@ -18,6 +19,7 @@ export default class Server {
     private publicFolder(){
         const publicPath = path.resolve(__dirname, '../public');
         this.app.use( express.static(publicPath)); 
+        this.app.use(bodyParser);
         this.app.use(cors({origin: 'http://localhost:4200'}));
     }
 

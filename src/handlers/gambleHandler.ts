@@ -7,7 +7,23 @@ export default class gambleHandler {
 
     private static turn: Turn;
 
-    public static gambleHandler(req: any, res: any) {
+    public static gambleHandler(req: any, res: any) {/*
+        if (req.body.namePlayerOne != undefined && req.body.namePlayerTwo != undefined) {
+            
+            //register name:
+            const namePlayerOne = req.body.namePlayerOne;
+            const namePlayerTwo = req.body.namePlayerTwo;
+
+            if (namePlayerOne && namePlayerTwo) {
+                this.turn = new Turn();
+                this.turn.namePlayer1_ = namePlayerOne;
+                this.turn.namePlayer1_ = namePlayerTwo;
+                return;
+            }
+
+        }*/
+
+        //gamble logic
 
         if (this.turn == null) {
             this.turn = new Turn;
@@ -43,13 +59,13 @@ export default class gambleHandler {
             const query = `INSERT INTO table_statistics (ID, PLAYER, SCORE) VALUES (NULL,"${winner}",1);`;
             MYSQL.runQuery(query, (err: any) => {
                 if (err) {
-                    
+
                     res.status(400).json({
                         ok: false,
                         error: err
                     });
-                }else{
-                    res.setHeader('Access-Control-Allow-Origin','localhost:4200');
+                } else {
+                    res.setHeader('Access-Control-Allow-Origin', 'localhost:4200');
                     res.json({
                         movePlayerOne,
                         movePlayerTwo,
@@ -62,7 +78,7 @@ export default class gambleHandler {
             });
             this.turn = new Turn();
         } else {
-            res.setHeader('Access-Control-Allow-Origin','localhost:4200');
+            res.setHeader('Access-Control-Allow-Origin', 'localhost:4200');
             res.json({
                 movePlayerOne,
                 movePlayerTwo,
