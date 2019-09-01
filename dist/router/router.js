@@ -27,4 +27,7 @@ router.get('/statistics', (req, res) => {
         }
     });
 });
+router.post('/register', (req, res) => {
+    gambleHandler_1.default.gambleHandler(req, res);
+});
 exports.default = router;

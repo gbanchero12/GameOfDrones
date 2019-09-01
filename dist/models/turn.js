@@ -3,9 +3,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class Turn {
     constructor() {
         this.numberOfTurn = 0;
+        this.namePlayer1 = 'Player 1';
+        this.namePlayer2 = 'Player 2';
         this.numberOfTurn = 0;
         this.scorePlayerOne = 0;
         this.scorePlayerTwo = 0;
+    }
+    set namePlayer1_(value) {
+        this.namePlayer1 = value;
+    }
+    set namePlayer2_(value) {
+        this.namePlayer2 = value;
     }
     get numberOfTurn_() {
         return this.numberOfTurn;
@@ -38,9 +46,9 @@ class Turn {
     }
     evaluateGame() {
         if (this.numberOfTurn == 3 && this.scorePlayerOne_ > this.scorePlayerTwo_)
-            return 'Player 1';
+            return this.namePlayer1;
         if (this.numberOfTurn == 3 && this.scorePlayerOne_ < this.scorePlayerTwo_)
-            return 'Player 2';
+            return this.namePlayer2;
         if (this.numberOfTurn == 3 && this.scorePlayerOne_ == this.scorePlayerTwo_)
             return 'Draw';
         if (this.numberOfTurn == 3)

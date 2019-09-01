@@ -27,4 +27,10 @@ router.get('/statistics', (req: Request, res: Response) => {
     })
 });
 
+router.post('/register', (req: Request, res: Response)=>{
+
+    gambleHandler.gambleHandler(req,res);
+    
+})
+
 export default router;

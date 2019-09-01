@@ -9,6 +9,7 @@ const turn_1 = __importDefault(require("../models/turn"));
 const mysql_1 = __importDefault(require("../mysql/mysql"));
 class gambleHandler {
     static gambleHandler(req, res) {
+        //gamble logic
         if (this.turn == null) {
             this.turn = new turn_1.default;
         }
