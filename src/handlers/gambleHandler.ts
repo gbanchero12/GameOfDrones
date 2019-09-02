@@ -7,7 +7,7 @@ export default class gambleHandler {
 
     private static turn: Turn;
 
-    public static gambleHandler(req: any, res: any) {/*
+    public static gambleHandler(req: any, res: any) {
         
         //gamble logic
 
