@@ -8,21 +8,7 @@ export default class gambleHandler {
     private static turn: Turn;
 
     public static gambleHandler(req: any, res: any) {/*
-        if (req.body.namePlayerOne != undefined && req.body.namePlayerTwo != undefined) {
-            
-            //register name:
-            const namePlayerOne = req.body.namePlayerOne;
-            const namePlayerTwo = req.body.namePlayerTwo;
-
-            if (namePlayerOne && namePlayerTwo) {
-                this.turn = new Turn();
-                this.turn.namePlayer1_ = namePlayerOne;
-                this.turn.namePlayer1_ = namePlayerTwo;
-                return;
-            }
-
-        }*/
-
+        
         //gamble logic
 
         if (this.turn == null) {
