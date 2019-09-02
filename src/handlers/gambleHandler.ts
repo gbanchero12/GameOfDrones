@@ -51,7 +51,9 @@ export default class gambleHandler {
                         error: err
                     });
                 } else {
-                    res.setHeader('Access-Control-Allow-Origin', 'localhost:4200');
+                    res.setHeader('Access-Control-Allow-Origin', '*');
+                    res.setHeader("Content-Type","application/json");
+                    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
                     res.json({
                         movePlayerOne,
                         movePlayerTwo,
@@ -64,7 +66,9 @@ export default class gambleHandler {
             });
             this.turn = new Turn();
         } else {
-            res.setHeader('Access-Control-Allow-Origin', 'localhost:4200');
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader("Content-Type","application/json");
+            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');            
             res.json({
                 movePlayerOne,
                 movePlayerTwo,
