@@ -28,7 +28,7 @@ router.get('/statistics', (req: Request, res: Response) => {
 });
 
 router.post('/register', (req: Request, res: Response)=>{
-
+    /*DEPRECATED*/
     gambleHandler.gambleHandler(req,res);
     
 })
