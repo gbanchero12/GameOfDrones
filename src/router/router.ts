@@ -39,6 +39,7 @@ router.post('/register/',(req: Request, res: Response)=>{
     gambleHandler._turn.namePlayer2_ = query.namePlayerTwo;
     res.json({ok: true});
     }
+    res.sendStatus(400);
     
 });
 
