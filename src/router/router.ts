@@ -1,6 +1,8 @@
 import { Router, Request, Response } from 'express';
 import gambleHandler from '../handlers/gambleHandler';
 import MYSQL from '../mysql/mysql';
+import Turn from '../models/turn';
+
 
 
 const router = Router();
@@ -27,10 +29,17 @@ router.get('/statistics', (req: Request, res: Response) => {
     })
 });
 
-router.post('/register', (req: Request, res: Response)=>{
-    /*DEPRECATED*/
-    gambleHandler.gambleHandler(req,res);
+router.post('/register/',(req: Request, res: Response)=>{
     
-})
+    const query = req.query;
+    if(query.namePlayerOne != undefined && query.namePlayerTwo != undefined){
+
+    gambleHandler._turn = new Turn();
+    gambleHandler._turn.namePlayer1_ = query.namePlayerOne;
+    gambleHandler._turn.namePlayer2_ = query.namePlayerTwo;
+    res.json({ok: true});
+    }
+    
+});
 
 export default router;

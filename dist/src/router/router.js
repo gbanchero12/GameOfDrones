@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const gambleHandler_1 = __importDefault(require("../handlers/gambleHandler"));
 const mysql_1 = __importDefault(require("../mysql/mysql"));
+const turn_1 = __importDefault(require("../models/turn"));
 const router = express_1.Router();
 router.get('/gamble/:id/:id2', (req, res) => {
     gambleHandler_1.default.gambleHandler(req, res);
@@ -27,7 +28,13 @@ router.get('/statistics', (req, res) => {
         }
     });
 });
-router.post('/register', (req, res) => {
-    gambleHandler_1.default.gambleHandler(req, res);
+router.post('/register/', (req, res) => {
+    const query = req.query;
+    if (query.namePlayerOne != undefined && query.namePlayerTwo != undefined) {
+        gambleHandler_1.default._turn = new turn_1.default();
+        gambleHandler_1.default._turn.namePlayer1_ = query.namePlayerOne;
+        gambleHandler_1.default._turn.namePlayer2_ = query.namePlayerTwo;
+        res.json({ ok: true });
+    }
 });
 exports.default = router;

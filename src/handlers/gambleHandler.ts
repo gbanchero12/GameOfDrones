@@ -3,9 +3,11 @@ import gambleController from '../controller/gambleController';
 import Turn from '../models/turn';
 import MYSQL from '../mysql/mysql';
 
+
 export default class gambleHandler {
 
     private static turn: Turn;
+   
 
     public static gambleHandler(req: any, res: any) {
         
@@ -80,6 +82,12 @@ export default class gambleHandler {
         }
 
 
+    }
+    public static get _turn(): Turn {
+        return gambleHandler.turn;
+    }
+    public static set _turn(value: Turn) {
+        gambleHandler.turn = value;
     }
 
 
