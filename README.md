@@ -1,6 +1,6 @@
 # GameOfDrones
 
-# Game Of Drones - URU IT - Guillermo Banchero:
+# Game Of Drones - Guillermo Banchero:
 
 # FrontEnd - Angular: https://github.com/gbanchero12/GameOfDronesFrontEnd  
 # BackEnd - NodeJs: https://github.com/gbanchero12/GameOfDrones
