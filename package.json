@@ -21,7 +21,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "mysql": "github:mysqljs/mysql",
     "nodemon": "^1.19.1",
     "typescript": "^3.6.2"
